@@ -1,0 +1,111 @@
+/* PDF Editor Styles */
+
+.editable-text {
+  outline: none !important;
+  cursor: text;
+  transition: all 0.2s ease;
+  min-height: 1em;
+  position: relative;
+}
+
+.editable-text:hover {
+  background: rgba(59, 130, 246, 0.05);
+  outline: 1px dashed rgba(59, 130, 246, 0.3) !important;
+  border-radius: 2px;
+}
+
+.editable-text:focus {
+  background: rgba(59, 130, 246, 0.08);
+  outline: 2px solid rgba(59, 130, 246, 0.4) !important;
+  border-radius: 2px;
+}
+
+.editable-text:empty:before {
+  content: attr(data-placeholder);
+  color: #9CA3AF;
+  font-style: italic;
+  pointer-events: none;
+}
+
+/* Prevent outline from affecting layout */
+.editable-text:focus {
+  outline-offset: -2px;
+}
+
+/* Selection styling */
+.editable-text::selection {
+  background: rgba(59, 130, 246, 0.3);
+}
+
+/* Empty state */
+.empty-editable {
+  min-height: 1.5em;
+}
+
+/* Toolbar styles will be added here */
+.formatting-toolbar {
+  position: fixed;
+  z-index: 1000;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #E5E7EB;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.formatting-toolbar button {
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formatting-toolbar button:hover {
+  background: #F3F4F6;
+  border-color: #D1D5DB;
+}
+
+.formatting-toolbar button.active {
+  background: #DBEAFE;
+  border-color: #3B82F6;
+  color: #1E40AF;
+}
+
+.formatting-toolbar .toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: #E5E7EB;
+  margin: 0 4px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .formatting-toolbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    border-radius: 0;
+    border-top: 1px solid #E5E7EB;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    max-width: 100vw;
+    overflow-x: auto;
+    padding: 8px 12px;
+  }
+
+  .formatting-toolbar button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+}

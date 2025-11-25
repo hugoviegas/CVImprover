@@ -1,0 +1,100 @@
+import { ResumeData, Experience, Education, Project, Language } from '../../../types/resume';
+import { EditableText } from '../../Editor/PDFEditor/EditableText';
+import { useResume } from '../../../context/ResumeContext';
+
+export const ATSHeader = ({ personalInfo }: { personalInfo: ResumeData['personalInfo'] }) => {
+  const { updatePersonalInfo } = useResume();
+
+  return (
+    <header className="border-b-2 border-gray-900 pb-4 mb-6 text-center">
+      <EditableText
+        tag="h1"
+        className="text-3xl font-bold uppercase tracking-wide mb-2"
+        content={personalInfo.fullName}
+        onContentChange={(val: string) => updatePersonalInfo({ fullName: val })}
+        placeholder="YOUR NAME"
+      />
+      
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm">
+        <EditableText
+          tag="span"
+          content={personalInfo.location}
+          onContentChange={(val: string) => updatePersonalInfo({ location: val })}
+          placeholder="Location"
+        />
+        {personalInfo.phone && (
+          <>
+            <span className="text-gray-400">•</span>
+            <EditableText
+              tag="span"
+              content={personalInfo.phone}
+              onContentChange={(val: string) => updatePersonalInfo({ phone: val })}
+            />
+          </>
+        )}
+        {personalInfo.email && (
+          <>
+            <span className="text-gray-400">•</span>
+            <EditableText
+              tag="span"
+              content={personalInfo.email}
+              onContentChange={(val: string) => updatePersonalInfo({ email: val })}
+            />
+          </>
+        )}
+        {personalInfo.linkedin && (
+          <>
+            <span className="text-gray-400">•</span>
+            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">
+              LinkedIn
+            </a>
+          </>
+        )}
+        {personalInfo.website && (
+          <>
+            <span className="text-gray-400">•</span>
+            <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" className="hover:underline">
+              Portfolio
+            </a>
+          </>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export const ATSSectionTitle = ({ title }: { title: string }) => (
+  <h2 className="text-lg font-bold uppercase border-b border-gray-300 mb-4 mt-2">{title}</h2>
+);
+
+export const ATSSummary = ({ summary }: { summary: ResumeData['summary'] }) => {
+  const { updateSummary } = useResume();
+  
+  if (!summary.rawText) return null;
+  
+  return (
+    <div className="mb-6">
+      <ATSSectionTitle title="Professional Summary" />
+      <EditableText
+        tag="p"
+        className="text-justify whitespace-pre-line"
+        content={summary.rawText}
+        onContentChange={(val: string) => updateSummary({ rawText: val })}
+      />
+    </div>
+  );
+};
+
+export const ATSSkills = ({ skills }: { skills: ResumeData['skills'] }) => {
+  const allSkills = [
+    ...(skills.categorized?.infrastructureAndSystems || []),
+    ...(skills.categorized?.networkAndSecurity || []),
+    ...(skills.categorized?.programmingAndScripting || []),
+    ...(skills.categorized?.other || [])
+  ];
+
+  if (allSkills.length === 0) return null;
+
+  return (
+    <div className="mb-6">
+      <ATSSectionTitle title="Technical Skills" />

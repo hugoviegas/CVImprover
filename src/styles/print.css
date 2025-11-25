@@ -1,0 +1,80 @@
+/* Print Styles for A4 Resume Preview */
+@media print {
+  /* Remove all margins and set A4 page size */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  /* Hide UI elements and navigation */
+  nav,
+  header.no-print,
+  footer,
+  .no-print,
+  button,
+  [data-no-print],
+  .template-selector {
+    display: none !important;
+  }
+
+  /* Ensure A4 pages display correctly */
+  .a4-page {
+    page-break-after: always;
+    page-break-inside: avoid;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: 210mm;
+    height: 297mm;
+  }
+
+  /* Last page*/
+  .a4-page:last-child {
+    page-break-after: auto;
+  }
+
+  /* Avoid breaking content */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .break-inside-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Avoid orphans and widows */
+  p, li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Ensure links are visible but not underlined by default */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 80%;
+    color: #666;
+  }
+
+  /* Hide page numbers if present */
+  .page-number {
+    display: none;
+  }
+}
