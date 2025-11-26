@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useResume } from '../../context/ResumeContext';
 import { useReactToPrint } from 'react-to-print';
 import { Download, Edit3, Eye } from 'lucide-react';

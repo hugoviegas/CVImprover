@@ -1,5 +1,4 @@
 import React from 'react';
-import { clsx } from 'clsx';
 
 interface FontPickerProps {
   value: string;
@@ -22,7 +21,7 @@ const FONTS = [
 
 export const FontPicker: React.FC<FontPickerProps> = ({ value, onChange }) => {
   // Normalize font value (remove quotes)
-  const normalizedValue = value.replace(/['"]/g, '').split(',')[0].trim();
+  const normalizedValue = value.replace(/['\"]/g, '').split(',')[0].trim();
 
   return (
     <select

@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Home, FileText, Briefcase, ChevronDown, ChevronUp, Menu, X } from 'lucide-react';
 import { useResume } from '../../context/ResumeContext';
 import { useIsMobile } from '../../hooks/useMediaQuery';
-import { clsx } from 'clsx';
 
 interface TopNavProps {
   showJobDescription?: boolean;
